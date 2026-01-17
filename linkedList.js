@@ -132,22 +132,81 @@ class LinkedList {
       return;
     }
 
-    let current = this.head;
-    let i = 0;
-
     if (index === 0) {
-      this.head = current.next;
+      this.head = this.head.next;
       return;
     }
 
-    while (current && i < index - 1) {
+    let current = this.head;
+    let i = 0;
+
+    while (current !== null && i < index - 1) {
       current = current.next;
       i++;
     }
 
-    if (!current || !current.next) return;
+    if (current === null || current.next === null) return;
 
     current.next = current.next.next;
+  }
+
+  // find middle point
+  getMiddle() {
+    let current = this.head;
+
+    let slow = current;
+    let fast = current;
+
+    while (fast !== null && fast.next !== null) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+
+    return `Middle: ${slow.value}`;
+  }
+
+  // get the n-th element from the node
+  getElement(index) {
+    if (index < 0) {
+      return;
+    }
+
+    if (index === 0) {
+      return this.head !== null ? this.head.value : null;
+    }
+
+    let current = this.head;
+    let i = 0;
+
+    while (current !== null && i < index - 1) {
+      current = current.next;
+      i++;
+    }
+
+    if (current === null || current.next === null) return null;
+
+    return current.next.value;
+  }
+
+  // detect cycle (use Floyed Cycle Detection)
+  hasCycle() {
+    if (this.head === null) {
+      return false;
+    }
+
+    let slow = this.head;
+    let fast = this.head;
+
+    while (fast !== null && fast.next !== null) {
+      slow = slow.next;
+      fast = fast.next.next;
+
+      if (slow === fast) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
 
@@ -165,8 +224,13 @@ list.prepend(9);
 
 // list.find(9);
 list.insertAt(40, 1);
+list.insertAt(35, 1);
 
 list.deleteAtIndex(2);
-list.view();
+// list.view();
+// list.getMiddle();
 
 // console.log(list.getSize());
+// console.log(list.getMiddle());
+// console.log(list.getElement(3));
+console.log(list.hasCycle());
