@@ -1,15 +1,15 @@
 // Given the array of integers nums, you will choose two different indices i and j of that array.
 // Return the maximum value of (nums[i]-1)*(nums[j]-1).
 
-const nums = [2, 1, 3];
+const nums = [2, 1, 3, 8, 9, 11];
 
-function findMaximum(array) {
+function maxProduct(array) {
   if (array.length < 2) {
     return array[0];
   }
 
-  let max1 = 0; //2, 3
-  let max2 = 0; //0, 1, 2
+  let max1 = 0; // 2 2 3
+  let max2 = 0; // 0 1 2
 
   for (let i = 0; i < array.length; i++) {
     if (array[i] > max1) {
@@ -23,4 +23,4 @@ function findMaximum(array) {
   return (max1 - 1) * (max2 - 1);
 }
 
-console.log(findMaximum(nums));
+console.log(maxProduct(nums));
