@@ -1,26 +1,36 @@
-// Given the array of integers nums, you will choose two different indices i and j of that array.
-// Return the maximum value of (nums[i]-1)*(nums[j]-1).
+1589. Maximum Sum Obtained of Any Permutation
+Medium
+Topics
+premium lock icon
+Companies
+Hint
+We have an array of integers, nums, and an array of requests where requests[i] = [starti, endi]. The ith request asks for the sum of nums[starti] + nums[starti + 1] + ... + nums[endi - 1] + nums[endi]. Both starti and endi are 0-indexed.
 
-const nums = [2, 1, 3];
+Return the maximum total sum of all requests among all permutations of nums.
 
-function findMaximum(array) {
-  if (array.length < 2) {
-    return array[0];
-  }
+Since the answer may be too large, return it modulo 109 + 7.
 
-  let max1 = 0; //2, 3
-  let max2 = 0; //0, 1, 2
+ 
 
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] > max1) {
-      max2 = max1;
-      max1 = array[i];
-    } else if (array[i] > max2) {
-      max2 = array[i];
-    }
-  }
+Example 1:
 
-  return (max1 - 1) * (max2 - 1);
-}
+Input: nums = [1,2,3,4,5], requests = [[1,3],[0,1]]
+Output: 19
+Explanation: One permutation of nums is [2,1,3,4,5] with the following result: 
+requests[0] -> nums[1] + nums[2] + nums[3] = 1 + 3 + 4 = 8
+requests[1] -> nums[0] + nums[1] = 2 + 1 = 3
+Total sum: 8 + 3 = 11.
+A permutation with a higher total sum is [3,5,4,2,1] with the following result:
+requests[0] -> nums[1] + nums[2] + nums[3] = 5 + 4 + 2 = 11
+requests[1] -> nums[0] + nums[1] = 3 + 5  = 8
+Total sum: 11 + 8 = 19, which is the best that you can do.
+Example 2:
 
-console.log(findMaximum(nums));
+Input: nums = [1,2,3,4,5,6], requests = [[0,1]]
+Output: 11
+Explanation: A permutation with the max total sum is [6,5,4,3,2,1] with request sums [11].
+Example 3:
+
+Input: nums = [1,2,3,4,5,10], requests = [[0,2],[1,3],[1,1]]
+Output: 47
+Explanation: A permutation with the max total sum is [4,10,5,3,2,1] with request sums [19,18,10].
