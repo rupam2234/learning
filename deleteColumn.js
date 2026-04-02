@@ -11,17 +11,18 @@
 // Return the number of columns that you will delete.
 
 function deleteColumn(strings) {
-  if (strings.length < 2) {
+  if (strings.length < 1) {
     return 0;
   }
 
   let deleted = 0;
-  const rowLength = strings.length;
-  const colLength = strings[0].length;
 
-  for (let col = 0; col < colLength; col++) {
-    for (let row = 0; row < rowLength - 1; row++) {
-      if (strings[row][col] > strings[row + 1][col]) {
+  const h_len = strings[0].length;
+  const v_len = strings.length;
+
+  for (let i = 0; i < h_len; i++) {
+    for (let j = 0; j < v_len - 1; j++) {
+      if (strings[j][i] > strings[j + 1][i]) {
         deleted++;
         break;
       }
@@ -31,4 +32,4 @@ function deleteColumn(strings) {
   return deleted;
 }
 
-console.log(deleteColumn(["abc", "bce", "cae"]));
+console.log(deleteColumn(["abc", "bce", "caa"]));
